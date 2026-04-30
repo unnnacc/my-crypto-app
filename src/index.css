@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@layer base {
+  :root { --app-font-mono: 'JetBrains Mono', 'Fira Code', monospace; }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl;
+    box-shadow: inset 0 1px 1px 0 rgba(255,255,255,0.1), 0 10px 30px -10px rgba(0,0,0,0.5);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600;
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 0 20px rgba(56, 189, 248, 0.4);
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-move 5s ease infinite;
+  }
+
+  .shimmer-effect {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer-effect::after {
+    content: "";
+    position: absolute;
+    top: -100%; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 4s infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes gradient-move { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes shimmer { 0% { top: -100%; left: -100%; } 100% { top: 100%; left: 100%; } }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+
+.float-element { animation: float 6s ease-in-out infinite; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
