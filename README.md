@@ -1,28 +1,64 @@
-# Crypto Business Card & Lead Management Bot 🚀
+# Crypto Card & [Lead Gen Bot](https://github.com/unnnacc/bot) 🚀
 
-Профессиональный инструмент для репрезентации личного бренда и автоматизации сбора заявок на разработку. Проект представляет собой связку современного фронтенда (Mini App) и отказоустойчивого бэкенда с интеграцией облачной БД.
+Собрал полноценный хаб для репрезентации и сбора лидов - Связка из живого фронта на React и бэкенда на Node.js, которая сама складывает заказы в базу и пушит уведомления в админ-чат.
 
-## 🛠 Технический стек
-- **Frontend:** React + Vite + Tailwind CSS v4 (с использованием стеклянных эффектов и кастомных анимаций).
-- **Backend:** Node.js + Telegraf.js.
-- **Database:** MongoDB Atlas (Mongoose ODM) для хранения заявок и управления состояниями.
+## 🛠 Стек
+- **Frontend:** React + Vite + Tailwind CSS v4. Задизайнил в стиле «стекло» с кастомными анимациями, чтобы выглядело дорого.
+- **Backend:** Node.js + Telegraf.
+- **DB:** MongoDB Atlas (Mongoose). Храню тут всех лидов и стейты пользователей.
+- **Infrastructure:** Vercel (для фронта) + Render (для бота).
+*Все за бесплатно))*
+
+## 🏗 Что внутри (Технический разбор)
+Пара моментов по архитектуре, чтобы не было вопросов:
+
+- **State Machine вместо Сцен:** Забил на стандартные `Scenes` в Telegraf, так как они иногда ведут себя непредсказуемо. Реализовал свой механизм стейтов через объект, чтобы опрос по заявкам не падал и работал как часы.
+- **Lead-пайплайн:** Сделал полноценный флоу: `Юзер` $\rightarrow$ `Валидация` $\rightarrow$ `Монга` $\rightarrow$ `Лог-канал`. Теперь все заявки падают в один чат, не теряются в личке.
+- **API интеграция:** Прикрутил CoinGecko для лайв-курсов валют. Сделал так, чтобы тикер обновлялся в реальном времени без лишних ререндеров.
+- **UX/UI:** Подцепил Telegram WebApp SDK, добавил хаптик-отклик (вибрацию), чтобы приложение ощущалось нативным.
+
+## 🚀 Фичи
+- **Интерактивная визитка:** Все контакты, соцсети и актуальные адреса кошельков в одном месте.
+- **Сбор заказов:** Пошаговый квиз (Стек $\rightarrow$ Бюджет $\rightarrow$ ТЗ).
+- **Админский функционал:** Есть команды для рассылки по базе `/broadcast` и чека общей статы `/stats`.
+- **Live Ticker:** Бегущая строка с курсами крипты прямо в приложении.
+
+## ⚙️ Как завести
+1. Клонируем репо.
+2. Настраиваем `.env` (токен бота, админ-айди, ссылка на Монгу и URL визитки).
+3. `npm install` $\rightarrow$ `npm start`.
+
+_Профит! Всё работает, деплой настроен._
+
+
+# Crypto Card & Lead Gen Bot 🚀
+
+Built a professional hub for personal branding and lead gen - full-stack combo: a slick React frontend (Mini App) and a Node.js backend that handles lead collection and pushes alerts to an admin chat.
+
+## 🛠 Tech Stack
+- **Frontend:** React + Vite + Tailwind CSS v4. Glassmorphism UI with custom animations for that premium feel.
+- **Backend:** Node.js + Telegraf.
+- **DB:** MongoDB Atlas (Mongoose). Storing all leads and user states here.
 - **Infrastructure:** Vercel (Frontend) & Render (Backend).
+  *for free))*
 
-## 🏗 Архитектурные особенности
-В процессе разработки были реализованы следующие технические решения:
+## 🏗 Tech Specs & Decisions
+A few notes on why I did it this way:
 
-- **State-Machine Logic:** Вместо стандартных сцен Telegraf, реализован собственный механизм управления состояниями (User States) для обеспечения максимальной стабильности при обработке многошаговых форм.
-- **Haptic Feedback & WebApp API:** Интеграция с Telegram WebApp SDK для обеспечения нативного пользовательского опыта.
-- **Lead Management System:** Автоматизированный пайплайн сбора заявок: `Пользователь` $\rightarrow$ `Бот (валидация)` $\rightarrow$ `MongoDB` $\rightarrow$ `Admin Log Chat`.
-- **CORS & Network Optimization:** Оптимизация запросов к API CoinGecko для обновления курсов криптовалют в реальном времени.
+- **Custom State Machine:** Skipped Telegraf's built-in `Scenes` because they can be flaky. Implemented a manual state-tracking system to keep the multi-step lead form rock-solid.
+- **Lead Pipeline:** Built a clean flow: `User` $\rightarrow$ `Validation` $\rightarrow$ `Mongo` $\rightarrow$ `Log Channel`. No more digging through DMs to find a client.
+- **API Integration:** Integrated CoinGecko API for real-time crypto rates. Optimized the ticker to avoid unnecessary re-renders.
+- **UX/UI:** Leveraged Telegram WebApp SDK and added haptic feedback for a native app experience.
 
-## 🚀 Функционал
-- **Интерактивная визитка:** Отображение профиля, социальных сетей и актуальных крипто-кошельков.
-- **Система сбора лидов:** Пошаговый опрос (Стек $\rightarrow$ Бюджет $\rightarrow$ ТЗ) с сохранением в БД.
-- **Админ-панель:** Встроенные команды для рассылки по базе пользователей (`/broadcast`) и анализа статистики (`/stats`).
-- **Real-time Ticker:** Живой мониторинг курсов валют на главной странице приложения.
+## 🚀 Features
+- **Interactive Card:** All socials, contacts, and active crypto wallets in one place.
+- **Lead Gen Wizard:** Step-by-step flow (Tech Stack $\rightarrow$ Budget $\rightarrow$ Scope).
+- **Admin Suite:** Built-in commands for DB broadcasting (`/broadcast`) and quick analytics (`/stats`).
+- **Live Ticker:** Real-time currency rates integrated into the frontend.
 
-## ⚙️ Развертывание
-1. Склонировать репозиторий.
-2. Настроить переменные окружения в `.env` (BOT_TOKEN, ADMIN_ID, LOG_CHAT_ID, MONGO_URI, WEBAPP_URL).
-3. Запустить `npm install` и `npm start`.
+## ⚙️ Quick Start
+1. Clone the repo.
+2. Fill in your `.env` (BOT_TOKEN, ADMIN_ID, LOG_CHAT_ID, MONGO_URI, WEBAPP_URL).
+3. `npm install` $\rightarrow$ `npm start`.
+
+_Done. Deployed and ready to go._
