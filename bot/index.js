@@ -50,3 +50,14 @@ bot.launch()
 // Грациозная остановка
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
+
+// Добавьте это в самый конец файла index.js
+const http = require('http');
+const port = process.env.PORT || 8080;
+
+http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('Bot is running!');
+}).listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
