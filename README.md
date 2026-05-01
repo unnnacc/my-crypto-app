@@ -1,16 +1,28 @@
-# React + Vite
+# Crypto Business Card & Lead Management Bot 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Профессиональный инструмент для репрезентации личного бренда и автоматизации сбора заявок на разработку. Проект представляет собой связку современного фронтенда (Mini App) и отказоустойчивого бэкенда с интеграцией облачной БД.
 
-Currently, two official plugins are available:
+## 🛠 Технический стек
+- **Frontend:** React + Vite + Tailwind CSS v4 (с использованием стеклянных эффектов и кастомных анимаций).
+- **Backend:** Node.js + Telegraf.js.
+- **Database:** MongoDB Atlas (Mongoose ODM) для хранения заявок и управления состояниями.
+- **Infrastructure:** Vercel (Frontend) & Render (Backend).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🏗 Архитектурные особенности
+В процессе разработки были реализованы следующие технические решения:
 
-## React Compiler
+- **State-Machine Logic:** Вместо стандартных сцен Telegraf, реализован собственный механизм управления состояниями (User States) для обеспечения максимальной стабильности при обработке многошаговых форм.
+- **Haptic Feedback & WebApp API:** Интеграция с Telegram WebApp SDK для обеспечения нативного пользовательского опыта.
+- **Lead Management System:** Автоматизированный пайплайн сбора заявок: `Пользователь` $\rightarrow$ `Бот (валидация)` $\rightarrow$ `MongoDB` $\rightarrow$ `Admin Log Chat`.
+- **CORS & Network Optimization:** Оптимизация запросов к API CoinGecko для обновления курсов криптовалют в реальном времени.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Функционал
+- **Интерактивная визитка:** Отображение профиля, социальных сетей и актуальных крипто-кошельков.
+- **Система сбора лидов:** Пошаговый опрос (Стек $\rightarrow$ Бюджет $\rightarrow$ ТЗ) с сохранением в БД.
+- **Админ-панель:** Встроенные команды для рассылки по базе пользователей (`/broadcast`) и анализа статистики (`/stats`).
+- **Real-time Ticker:** Живой мониторинг курсов валют на главной странице приложения.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ⚙️ Развертывание
+1. Склонировать репозиторий.
+2. Настроить переменные окружения в `.env` (BOT_TOKEN, ADMIN_ID, LOG_CHAT_ID, MONGO_URI, WEBAPP_URL).
+3. Запустить `npm install` и `npm start`.
